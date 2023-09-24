@@ -1,0 +1,32 @@
+.toy-preview {
+    text-align: center;
+    padding: 0.3em;
+    display: flex;
+    flex-direction: column;
+}
+.toy-preview h4{
+    text-transform: capitalize;
+    color: black;
+}
+
+/* .toy-preview img {
+    max-width: 100px;
+} */
+
+/* .toy-preview {
+    margin-inline-end: 1em;
+    font-size: 1.5rem;
+}
+
+.toy-preview span {
+    cursor: pointer;
+}
+
+.toy-preview p {
+    margin: 0;
+    font-size: 1rem;
+}
+
+.toy-preview .done {
+    text-decoration: line-through;
+}  */
