@@ -19,11 +19,15 @@ export function ToyIndex() {
     const isLoading = useSelector(storeState => storeState.toyModule.isLoading)
 
     useEffect(() => {
-        loadToys(sortBy)
+        loadToys(filterBy, sortBy)
+            .then(() => {
+                console.log('Loaded successfully')
+            })
             .catch(err => {
                 console.log('err:', err)
                 showErrorMsg('Cannot load toys')
             })
+        console.log(toys);
     }, [filterBy, sortBy])
 
     function onSetFilterBy(filterBy) {
@@ -59,6 +63,7 @@ export function ToyIndex() {
             })
     }
 
+    if (!toys) return <div>Loading...</div>
     return (
         <section className='toy-index'>
 

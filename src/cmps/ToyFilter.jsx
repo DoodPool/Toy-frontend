@@ -13,12 +13,12 @@ export function ToyFilter({ filterBy, onSetFilterBy }) {
 
     useEffect(() => {
         onSetFilterBy.current(filterByToEdit)
-        console.log('filterByToEdit', filterByToEdit)
+        // console.log('filterByToEdit', filterByToEdit)
     }, [filterByToEdit])
 
     function handleChange({ target }) {
-        console.log(target)
-        console.log(filterByToEdit)
+        // console.log(target)
+        // console.log(filterByToEdit)
         const field = target.name
         let value = target.value
         if (target.type === 'select-multiple') value = Array.from(target.selectedOptions, (option) => option.value)
@@ -66,7 +66,7 @@ export function ToyFilter({ filterBy, onSetFilterBy }) {
                     name="labels"
                     multiple
                     value={labels || []}>
-                    <option value=''> All </option>
+                    <option > All </option>
                     <>
                         {toyLabel.map(label => <option key={label} value={label}>{label}</option>)}
                     </>
