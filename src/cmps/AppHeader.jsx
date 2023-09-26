@@ -23,13 +23,14 @@ export function AppHeader() {
 
     return (
         <header className="app-header">
-            <nav>
+            <h1 className="logo">Solaris</h1>
+            <nav className="main-nav">
                 <NavLink to="/">Home</NavLink> |
                 <NavLink to="/toy">Toys</NavLink> |
                 <NavLink to="/about">About</NavLink> |
+                <NavLink to="/dashboard">Dashboard</NavLink> 
             </nav>
-            <h1>Toys App</h1>
-            {user && (
+            {/* {user && (
                 <section className="user-info">
                     <h3>
                         <span>Welcome, </span>{user.fullname}
@@ -41,7 +42,7 @@ export function AppHeader() {
                 <section className="user-info">
                     <LoginSignup />
                 </section>
-            )}
+            )} */}
         </header>
     );
 }

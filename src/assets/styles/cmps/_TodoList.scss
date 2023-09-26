@@ -1,0 +1,34 @@
+.toy-list {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    background-color: $clr-bg-gray;
+    padding: 50px;
+}
+
+.toy-list li {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    border-radius: 10px;
+    background-color: white;
+    padding: 80px 15px;
+    margin: 0.5em;
+}
+
+.btn-edit,
+.btn-details {
+    background-color: $clr-primary-yellow;
+
+    &:hover {
+        background-color: lighten($clr-primary-yellow, 5%);
+    }
+}
+
+.btn-remove {
+    background-color: $clr-primary-red;
+    
+    &:hover {
+        background-color: lighten($clr-primary-red, 8%);
+    }
+}

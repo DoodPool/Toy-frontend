@@ -1,0 +1,29 @@
+.app-header {
+  display: grid;
+  grid-auto-flow: column;
+  align-items: center;
+
+  background: linear-gradient(to right, $clr-primary-red, $clr-primary-yellow);
+  color: white;
+  padding: 1em;
+
+  .logo {
+    font-size: em(25px);
+  }
+
+  .logo::after {
+    content: "|";
+    width: 1px;
+    margin-left: 15px;
+  }
+
+  .main-nav {
+    font-size: em(20px);
+    font-family: Arial, Helvetica, sans-serif;
+
+    &>* {
+      padding: 10px;
+    }
+  }
+
+}
