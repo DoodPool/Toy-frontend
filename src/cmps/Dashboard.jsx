@@ -8,25 +8,14 @@ ChartJS.register(ArcElement, Tooltip, Legend);
 
 export function Dashboard() {
 
-    const [pricesPerLabel, setPricesPerLabel] = useState(null)
     const labels = toyService.getLabels()
-
-    useEffect(() => {
-        toyService.getPricesPerLabel()
-            .then(arr => {
-                console.log(arr)
-                setPricesPerLabel(arr)
-                // console.log('pricesPerLabel', pricesPerLabel)
-            })
-    }, [])
-
 
     const data = {
         labels: labels,
         datasets: [
             {
                 label: '# of Votes',
-                data: pricesPerLabel,
+                data: [5,10,6,7,11,16,22,30],
                 backgroundColor: [
                     'rgba(255, 99, 132, 0.2)',
                     'rgba(54, 162, 235, 0.2)',

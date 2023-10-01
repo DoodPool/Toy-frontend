@@ -16,14 +16,15 @@ export function ToyEdit() {
         if (params.toyId) loadToy()
     }, [])
 
-    function loadToy() {
-        toyService.getById(params.toyId)
-            .then(setToyToEdit)
-            .catch(err => {
-                console.log('Had issued in toy edit:', err);
-                navigate('/toy')
-                showErrorMsg('Toy not found!')
-            })
+    async function loadToy() {
+        try {
+            const toy = await toyService.getById(params.toyId)
+            setToyToEdit(toy)
+        } catch (err) {
+            console.log('Had issued in toy edit:', err);
+            navigate('/toy')
+            showErrorMsg('Toy not found!')
+        }
     }
 
     function handleChange({ target }) {
@@ -32,13 +33,14 @@ export function ToyEdit() {
         setToyToEdit(prevToy => ({ ...prevToy, [field]: value }))
     }
 
-    function onSaveToy(ev) {
+    async function onSaveToy(ev) {
         ev.preventDefault()
-        toyService.save(toyToEdit)
-            .then(() => navigate('/toy'))
-            .catch(err => {
-                showErrorMsg('Cannot save toy', err)
-            })
+        try {
+            await toyService.save(toyToEdit)
+            navigate('/toy')
+        } catch (err) {
+            showErrorMsg('Cannot save toy', err)
+        }
     }
 
     const { name, price } = toyToEdit
@@ -56,7 +58,7 @@ export function ToyEdit() {
                 <input onChange={handleChange} value={price} type="number" name="price" id="price" />
 
                 <button>Save</button>
-                
+
             </form>
         </section>
     )

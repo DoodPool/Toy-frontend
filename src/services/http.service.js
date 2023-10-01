@@ -25,7 +25,8 @@ export const httpService = {
 }
 
 async function ajax(endpoint, method = 'GET', data = null) {
-    // console.log('data:', data)
+    console.log('data:', data)
+    console.log('endpoint:', endpoint)
     try {
         const res = await axios({
             url: `${BASE_URL}${endpoint}`,
@@ -33,6 +34,7 @@ async function ajax(endpoint, method = 'GET', data = null) {
             data,
             params: (method === 'GET') ? data : null
         })
+        console.log('res ajax', res.data)
         return res.data
     } catch (err) {
         if (err.response && err.response.status === 401) {

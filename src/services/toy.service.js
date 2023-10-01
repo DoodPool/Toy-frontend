@@ -12,7 +12,7 @@ export const toyService = {
     getDefaultFilter,
     getDefaultSort,
     getLabels,
-    getPricesPerLabel,
+    // getPricesPerLabel,
 }
 
 function query(filterBy = {}, sortBy) {
@@ -57,7 +57,7 @@ function getLabels() {
 
 function getEmptyToy() {
     return {
-        _id: '',
+        // _id: '',
         name: '',
         price: 123,
         labels: ['Doll', 'Battery Powered', 'Baby'],
@@ -69,36 +69,36 @@ function getEmptyToy() {
 
 
 
-function getPricesPerLabel() {
-    const filterBy = getDefaultFilter()
-    const sortBy = getDefaultSort()
+// function getPricesPerLabel() {
+//     const filterBy = getDefaultFilter()
+//     const sortBy = getDefaultSort()
 
-    let labels = {
-        'On wheels': 0,
-        'Box game': 0,
-        'Art': 0,
-        'Baby': 0,
-        'Doll': 0,
-        'Puzzle': 0,
-        'Outdoor': 0,
-        'Battery Powered': 0
-    };
+//     let labels = {
+//         'On wheels': 0,
+//         'Box game': 0,
+//         'Art': 0,
+//         'Baby': 0,
+//         'Doll': 0,
+//         'Puzzle': 0,
+//         'Outdoor': 0,
+//         'Battery Powered': 0
+//     };
     
-    return new Promise((resolve, reject) => {
-        const toysPromise = query(filterBy, sortBy);
+//     return new Promise((resolve, reject) => {
+//         const toysPromise = query(filterBy, sortBy);
     
-        toysPromise.then(toys => {
-            const promises = toys.map(toy =>
-                Promise.all(
-                    toy.labels.map(label => {
-                        labels[label] += toy.price;
-                    })
-                )
-            );
+//         toysPromise.then(toys => {
+//             const promises = toys.map(toy =>
+//                 Promise.all(
+//                     toy.labels.map(label => {
+//                         labels[label] += toy.price;
+//                     })
+//                 )
+//             );
     
-            Promise.all(promises)
-                .then(() => resolve(labels))
-                .catch(err => reject(err));
-        });
-    });
-    }
+//             Promise.all(promises)
+//                 .then(() => resolve(labels))
+//                 .catch(err => reject(err));
+//         });
+//     });
+//     }

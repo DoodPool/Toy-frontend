@@ -7,6 +7,7 @@ import { toyService } from '../services/toy.service.js'
 import { ToyFilter } from '../cmps/ToyFilter.jsx'
 import { ToySort } from '../cmps/ToySort.jsx'
 import { ToyList } from '../cmps/ToyList.jsx'
+import { Filter } from '../cmps/Filter.jsx'
 
 export function ToyIndex() {
 
@@ -19,30 +20,29 @@ export function ToyIndex() {
     const isLoading = useSelector(storeState => storeState.toyModule.isLoading)
 
     useEffect(() => {
-        loadToys(filterBy, sortBy)
-            .then(() => {
-                console.log('Loaded successfully')
-            })
-            .catch(err => {
+        const fetchData = async () => {
+            try {
+                await loadToys(filterBy, sortBy)
+            } catch (err) {
                 console.log('err:', err)
                 showErrorMsg('Cannot load toys')
-            })
-        console.log(toys);
+            }
+        }
+        fetchData()
     }, [filterBy, sortBy])
 
     function onSetFilterBy(filterBy) {
         setFilterBy(filterBy)
     }
 
-    function onRemoveToy(toyId) {
-        removeToy(toyId)
-            .then(() => {
-                showSuccessMsg('Toy removed')
-            })
-            .catch(err => {
-                console.log('Cannot remove toy', err)
-                showErrorMsg('Cannot remove toy')
-            })
+    async function onRemoveToy(toyId) {
+        try {
+            await removeToy(toyId)
+            showSuccessMsg('Toy removed')
+        } catch (err) {
+            console.log('Cannot remove toy', err)
+            showErrorMsg('Cannot remove toy')
+        }
     }
 
     function handleChange({ target }) {
@@ -50,17 +50,16 @@ export function ToyIndex() {
         setToyToAdd(prevToy => ({ ...prevToy, name: value }))
     }
 
-    function onAddToy(ev) {
+    async function onAddToy(ev) {
         ev.preventDefault()
-        addToy(toyToAdd, loggedinUser)
-            .then(() => {
-                showSuccessMsg('Toy added')
-                setToyToAdd(toyService.getEmptyToy())
-            })
-            .catch(err => {
-                console.log('Cannot add toy', err)
-                showErrorMsg('Cannot add toy')
-            })
+        try {
+            await addToy(toyToAdd, loggedinUser)
+            showSuccessMsg('Toy added')
+            setToyToAdd(toyService.getEmptyToy())
+        } catch (err) {
+            console.log('Cannot add toy', err)
+            showErrorMsg('Cannot add toy')
+        }
     }
 
     if (!toys) return <div>Loading...</div>
@@ -68,7 +67,9 @@ export function ToyIndex() {
         <section className='toy-index'>
 
             <main>
-                <ToyFilter filterBy={filterBy} onSetFilterBy={onSetFilterBy} />
+                {/* <ToyFilter filterBy={filterBy} onSetFilterBy={onSetFilterBy} /> */}
+                <Filter filterBy={filterBy} onSetFilterBy={onSetFilterBy} />
+
 
                 <form onSubmit={onAddToy}>
                     <input

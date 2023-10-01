@@ -1,6 +1,7 @@
 
 import { toyService } from "../services/toy.service.js"
 import { utilService } from "../services/util.service.js"
+import { Filter } from './Filter.jsx'
 import { useState, useEffect, useRef } from 'react'
 
 const toyLabel = toyService.getLabels()
@@ -13,12 +14,10 @@ export function ToyFilter({ filterBy, onSetFilterBy }) {
 
     useEffect(() => {
         onSetFilterBy.current(filterByToEdit)
-        // console.log('filterByToEdit', filterByToEdit)
     }, [filterByToEdit])
 
     function handleChange({ target }) {
-        // console.log(target)
-        // console.log(filterByToEdit)
+        console.log('target', target);
         const field = target.name
         let value = target.value
         if (target.type === 'select-multiple') value = Array.from(target.selectedOptions, (option) => option.value)
@@ -59,6 +58,7 @@ export function ToyFilter({ filterBy, onSetFilterBy }) {
                     onChange={handleChange}
                 />
             </label>
+            {/* <Filter handleChange={handleChange} /> */}
             <label className='filter-label'>
                 <span className='filter-label'>Filter By</span>
                 <select

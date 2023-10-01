@@ -1,4 +1,5 @@
 import axios from 'axios'
+import { httpService } from './http.service'
 
 const STORAGE_KEY_LOGGEDIN_USER = 'loggedInUser'
 
@@ -14,36 +15,31 @@ function getLoggedinUser() {
     return JSON.parse(sessionStorage.getItem(STORAGE_KEY_LOGGEDIN_USER))
 }
 
-function login({ username, password }) {
-    return axios.post('/api/auth/login', { username, password })
-        .then(res => res.data)
-        .then(user => {
-            sessionStorage.setItem(STORAGE_KEY_LOGGEDIN_USER, JSON.stringify(user))
-            return user
-        })
+async function login({ username, password }) {
+    const user = await httpService.post('auth/login', { username, password })
+    sessionStorage.setItem(STORAGE_KEY_LOGGEDIN_USER, JSON.stringify(user))
+    return user
 }
 
-function signup({ username, password, fullname }) {
-    return axios.post('/api/auth/signup', { username, password, fullname })
-        .then(res => res.data)
-        .then(user => {
-            sessionStorage.setItem(STORAGE_KEY_LOGGEDIN_USER, JSON.stringify(user))
-            return user
-        })
+async function signup({ username, password, fullname, isAdmin }) {
+    console.log('isAdmin', isAdmin);
+    const user = await httpService.post('auth/signup', { username, password, fullname, isAdmin })
+    sessionStorage.setItem(STORAGE_KEY_LOGGEDIN_USER, JSON.stringify(user))
+    return user
 }
 
-function logout() {
-    return axios.post('/api/auth/logout')
-        .then(() => {
-            sessionStorage.removeItem(STORAGE_KEY_LOGGEDIN_USER)
-        })
+async function logout() {
+    const user = await httpService.post('auth/logout')
+    sessionStorage.removeItem(STORAGE_KEY_LOGGEDIN_USER)
+    return user
 }
 
 function getEmptyCredentials() {
     return {
         username: '',
         password: '',
-        fullname: ''
+        fullname: '',
+        isAdmin: false
     }
 }
 

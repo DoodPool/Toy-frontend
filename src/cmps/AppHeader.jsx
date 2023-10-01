@@ -10,15 +10,14 @@ export function AppHeader() {
     // const stokeCount = useSelector(storeState => storeState.toyModule.stokeCount)
     const user = useSelector(storeState => storeState.userModule.loggedinUser)
 
-    function onLogout() {
-        logout()
-            .then(() => {
-                showSuccessMsg('Logout successfully')
-            })
-            .catch(err => {
-                console.log('err:', err)
-                showErrorMsg('Cannot logout')
-            })
+    async function onLogout() {
+        try {
+            await logout()
+            showSuccessMsg('Logout successfully')
+        } catch (err) {
+            console.log('err:', err)
+            showErrorMsg('Cannot logout')
+        }
     }
 
     return (
@@ -28,9 +27,9 @@ export function AppHeader() {
                 <NavLink to="/">Home</NavLink> |
                 <NavLink to="/toy">Toys</NavLink> |
                 <NavLink to="/about">About</NavLink> |
-                <NavLink to="/dashboard">Dashboard</NavLink> 
+                <NavLink to="/dashboard">Dashboard</NavLink>
             </nav>
-            {/* {user && (
+            {user && (
                 <section className="user-info">
                     <h3>
                         <span>Welcome, </span>{user.fullname}
@@ -42,7 +41,7 @@ export function AppHeader() {
                 <section className="user-info">
                     <LoginSignup />
                 </section>
-            )} */}
+            )}
         </header>
     );
 }

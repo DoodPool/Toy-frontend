@@ -10,15 +10,18 @@ export function ToyDetails() {
     const [currToy, setCurrToy] = useState(null)
 
     useEffect(() => {
-        toyService.getById(params.toyId)
-            .then(toy => {
+        const fetchData = async () => {
+            try {
+                const toy = await toyService.getById(params.toyId)
                 if (!toy) return navigate('/toy')
                 setCurrToy(toy)
-            })
-            .catch(err => {
-                console.log('Had issues loading toy', err);
-            })
+            } catch (err) {
+                console.log('Had issues loading toy', err)
+            }
+        }
+        fetchData()
     }, [])
+    
 
     if (!currToy) return <h4>loading</h4>
     const { _id, txt, isDone } = currToy
