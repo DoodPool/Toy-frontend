@@ -3,8 +3,21 @@
     padding: 0.3em;
     display: flex;
     flex-direction: column;
+
+    .labels-list {
+        display: flex;
+        flex-wrap: wrap;
+
+        li {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
+            margin: 0.2em;
+        }
+    }
 }
-.toy-preview h4{
+
+.toy-preview h4 {
     text-transform: capitalize;
     color: black;
 }

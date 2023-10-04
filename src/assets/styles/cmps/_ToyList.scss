@@ -4,16 +4,16 @@
     flex-wrap: wrap;
     background-color: $clr-bg-gray;
     padding: 50px;
-}
 
-.toy-list li {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-    border-radius: 10px;
-    background-color: white;
-    padding: 80px 15px;
-    margin: 0.5em;
+    .toy-preview {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+        border-radius: 10px;
+        background-color: white;
+        padding: 80px 15px;
+        margin: 0.5em;
+    }
 }
 
 .btn-edit,
@@ -27,7 +27,7 @@
 
 .btn-remove {
     background-color: $clr-primary-red;
-    
+
     &:hover {
         background-color: lighten($clr-primary-red, 8%);
     }

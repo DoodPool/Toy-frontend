@@ -58,20 +58,7 @@ export function ToyFilter({ filterBy, onSetFilterBy }) {
                     onChange={handleChange}
                 />
             </label>
-            {/* <Filter handleChange={handleChange} /> */}
-            <label className='filter-label'>
-                <span className='filter-label'>Filter By</span>
-                <select
-                    onChange={handleChange}
-                    name="labels"
-                    multiple
-                    value={labels || []}>
-                    <option > All </option>
-                    <>
-                        {toyLabel.map(label => <option key={label} value={label}>{label}</option>)}
-                    </>
-                </select>
-            </label>
+
         </section>
     )
 }
